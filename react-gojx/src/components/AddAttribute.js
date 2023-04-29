@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const AddAttribute = () => {
+const AddAttribute = ({sendAttributeData}) => {
+
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+  
+    const handleSubmit = (e) => {
+        const attributeDataData = {name:name,type:type,visibility:'0'};
+      e.preventDefault();
+      sendAttributeData(attributeDataData); // Call onAddParameter function passed down from parent
+      setName("");
+      setType("");
+    };
+
     return (
         <div className="AddAttribute">
             <div class="formbold-mb-3">
@@ -9,11 +21,12 @@ const AddAttribute = () => {
                     type="text"
                     name="age"
                     id="age"
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Attribute name"
                     class="formbold-form-input" />
             </div>
             <div class="formbold-mb-3">
-                <label for="age" class="formbold-form-label"> Attribute type </label>
+                <label for="age" class="formbold-form-label" onChange={(e) => setType(e.target.value)}> Attribute type </label>
                 <select class="formbold-form-input" name="choice">
                     <option value="s1">String</option>
                     <option value="s2" selected>Integer</option>
@@ -30,6 +43,7 @@ const AddAttribute = () => {
                     placeholder=" Default value"
                     class="formbold-form-input" />
             </div>
+            <button onClick={handleSubmit}> submitattribute</button>
         </div>
     )
 }

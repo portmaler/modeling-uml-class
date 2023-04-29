@@ -218,8 +218,8 @@
 
 
   /* Split the screen in half */
-.split {
-  height: 100%;
+/*.split {
+  height: calc(100% );
   width: 50%;
   position: fixed;
   z-index: 1;
@@ -228,24 +228,66 @@
   padding-top: 20px;
 }
 
-/* Control the left side */
+
 .left {
   left: 0;
   background-color: #89ABE3FF;
 }
 
-/* Control the right side */
+
 .right {
   right: 0;
   background-color: #FCF6F5FF;
 }
 
+.center {
+  left: 0;
+  background-color: #FFFFFF;
+}*/
+/* Split the screen in half */
 
+
+/* Split the screen in half */
+
+.splitcontainer{
+  display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-gap: 20px; 
+    border: 1px solid black; 
+    width: 100%;
+}
+
+
+
+/* Control the left side */
+.splitleft {
+  
+  height: 100vh;
+  background-color: #89ABE3FF;
+
+
+}
+
+/* Control the right side */
+.splitright {
+  height: 100vh;
+  background-color: #FCF6F5FF;
+}
+
+/* Control the bottom segment */
+.splitbottom {
+grid-column-start: 1;
+grid-column-end: 3;
+  bottom: 0;
+  width: 100%;
+  height: 100vh ; /* adjust the 200px value as needed */
+  overflow-y: scroll;
+  background-color: #F0F0F0FF;
+}
 
 .btn-glyphicon {
   padding:8px;
   background:#ffffff;
-  margin-right:4px;
 }
 .icon-btn {
   padding: 1px 15px 3px 2px;

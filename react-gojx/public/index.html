@@ -303,8 +303,27 @@ window.addEventListener('DOMContentLoaded', init);
 </script>
   <body onload="init()">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="split left" id="root"></div>
-    <div id="myDiagramDiv" class="split right" ></div>
+   <div class="splitcontainer">
+    <div class="splitleft" id="root"></div>
+ 
+    <div id="xmldata" class="splitright">/* Split the screen in half */
+      .split 
+        height: 100vh;
+        width: 50%;
+        position: fixed;
+
+      
+      /* Adjust the left segment to take up the remaining space */
+      .left {
+        height: calc(100vh - 100px);
+      }
+   
+  </div>
+  <div id="myDiagramDiv" class="splitbottom" ></div>
+   </div>
+ 
+   
+  
     <div id="str" style="color:0xFFFFFF"></div>
     
     <!--
