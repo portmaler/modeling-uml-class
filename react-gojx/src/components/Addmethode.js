@@ -45,11 +45,7 @@ const Addmethode = ({ sendMthodeData }) => {
   return (
     <div className="AddAttribute">
       <div>{parametrelist}</div>
-      <div> <ul>
-        {parametrelist.map((parametre, index) => (
-          <li key={index}>{JSON.stringify(parametre)}</li>
-        ))}
-      </ul></div>
+ 
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label"> Methode name </label>
         <input
@@ -60,15 +56,8 @@ const Addmethode = ({ sendMthodeData }) => {
           onChange={(e) => setMethodName(e.target.value)}
           class="formbold-form-input" />
       </div>
-      <div><button onClick={addChildparameter} class="fa fa-plus" href='#'> add parametre</button></div>
-      {addparameterlist.map((component, index) => {
-        return (
-          <div style={attnumstyle} key={index}>
-            Parameter {index + 1}
-            {component}
-          </div>
-        );
-      })}
+     
+   
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label"> Return Type</label>
         <input
@@ -98,6 +87,15 @@ const Addmethode = ({ sendMthodeData }) => {
           placeholder=" Default value"
           class="formbold-form-input" />
       </div>
+      <div><button onClick={addChildparameter} class="fa fa-plus" href='#'> add parametre</button></div>
+      {addparameterlist.map((component, index) => {
+        return (
+          <div style={attnumstyle} key={index}>
+            Parameter {index + 1}
+            {component}
+          </div>
+        );
+      })}
       <button onClick={submitDtat}>sent data method</button>
 
     </div>

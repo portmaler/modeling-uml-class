@@ -5,9 +5,11 @@ const AddParameter = ({ onAddParameter }) => {
   const [type, setType] = useState("");
 
   const handleSubmit = (e) => {
-    const attributeDataData = {name:'name',type:'type'};
-    console.log(attributeDataData+name+type)
     e.preventDefault();
+    const attributeDataData = {name:name,type:type};
+    console.log(attributeDataData+name+type)
+
+ 
     onAddParameter(attributeDataData); // Call onAddParameter function passed down from parent
     setName("");
     setType("");
@@ -33,6 +35,7 @@ const AddParameter = ({ onAddParameter }) => {
           onChange={(e) => setType(e.target.value)}
           class="formbold-form-input"
         />
+                        <button class="formbold-form-input addCostomButton " >Add p</button>
       </div>
       <button onClick={handleSubmit}>add param h</button>
     </div>

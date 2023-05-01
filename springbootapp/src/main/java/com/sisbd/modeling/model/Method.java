@@ -1,5 +1,8 @@
 package com.sisbd.modeling.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,22 +12,67 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JacksonXmlRootElement(localName = "Method")
 public class Method {
 
     @Id
     @GeneratedValue
+    @JacksonXmlProperty(isAttribute = true)
     private Long id;
+
     private String name;
+
     private String type;
     @OneToMany(targetEntity = Parameter.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="method_par_fk", referencedColumnName = "id")
     private List<Parameter> parameters;
+    @JacksonXmlProperty(isAttribute = true)
     private String visibility;
 
+
+    public Long getId() {
+        return id;
+    }
+    @JacksonXmlProperty(localName = "Name")
+    public String getName() {
+        return name;
+    }
+    @JacksonXmlProperty(localName = "Type")
+    public String getType() {
+        return type;
+    }
+    @JacksonXmlProperty(localName = "Parameter")
+    @JacksonXmlElementWrapper(localName = "Packages")
+    public List<Parameter> getParameters() {
+        return parameters;
+    }
+    @JacksonXmlProperty(localName = "Visibility")
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setParameters(List<Parameter> parameters) {
+        this.parameters = parameters;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();

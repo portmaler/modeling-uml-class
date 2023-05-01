@@ -1,13 +1,17 @@
 package com.sisbd.modeling.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
-@Data
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,4 +29,46 @@ public class Package {
     @OneToMany(targetEntity = Package.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="package_pac_fk", referencedColumnName = "id")
     private List<Package> packages;
+
+    @JacksonXmlProperty(isAttribute = true)
+    public Long getId() {
+        return id;
+    }
+    @JacksonXmlProperty(localName = "Name")
+    public String getName() {
+        return name;
+    }
+    @JacksonXmlProperty(localName = "Class")
+    @JacksonXmlElementWrapper(localName = "Classes")
+    public List<Class> getClasses() {
+        return classes;
+    }
+    @JacksonXmlProperty(localName = "Interfaces")
+    public List<Interface> getInterfaces() {
+        return interfaces;
+    }
+    @JacksonXmlProperty(localName = "Packages")
+    public List<Package> getPackages() {
+        return packages;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setClasses(List<Class> classes) {
+        this.classes = classes;
+    }
+
+    public void setInterfaces(List<Interface> interfaces) {
+        this.interfaces = interfaces;
+    }
+
+    public void setPackages(List<Package> packages) {
+        this.packages = packages;
+    }
 }
