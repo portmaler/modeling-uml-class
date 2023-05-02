@@ -4,12 +4,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -26,6 +24,11 @@ public class Module {
     @OneToMany(targetEntity = Package.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="module_pac_fk", referencedColumnName = "id")
     private List<Package> packages;
+
+    @OneToMany(targetEntity = Package.class, cascade = CascadeType.ALL)
+    @JoinColumn(name ="module_link_fk", referencedColumnName = "id")
+    private List<Package> links;
+
     @JacksonXmlProperty(isAttribute = true)
     public Long getId() {
         return id;
@@ -39,5 +42,10 @@ public class Module {
     @JacksonXmlProperty(localName = "Package")
     public List<Package> getPackages() {
         return packages;
+    }
+    @JacksonXmlElementWrapper(localName = "links")
+    @JacksonXmlProperty(localName = "Link")
+    public List<Package> getLinks() {
+        return links;
     }
 }

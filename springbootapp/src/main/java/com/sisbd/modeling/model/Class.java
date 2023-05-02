@@ -4,12 +4,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @AllArgsConstructor
@@ -83,7 +81,7 @@ public class Class {
     public List<Method> getMethods() {
         return Methods;
     }
-/* public String toString() {
-        return "{\"key\":" + this.id + ", \"name\" : \"" + this.Name + "\", \"properties\" :" + this.Attributes + ", \"methods\":" + this.Methods + "}";
-    }*/
+ public String toString() {
+        return "{\"key\":" + this.id + ", \"name\" : \"" + this.Name + "\", \"properties\" :" + this.Attributes + ", \"methods\":" + this.Methods + "},";
+    }
 }

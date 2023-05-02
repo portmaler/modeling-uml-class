@@ -5,12 +5,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,7 +43,7 @@ public class Method {
         return type;
     }
     @JacksonXmlProperty(localName = "Parameter")
-    @JacksonXmlElementWrapper(localName = "Packages")
+    @JacksonXmlElementWrapper(localName = "Parameters")
     public List<Parameter> getParameters() {
         return parameters;
     }
