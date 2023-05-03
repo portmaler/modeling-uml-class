@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-
 const AddParameter = ({ onAddParameter }) => {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const attributeDataData = {name:name,type:type};
-    console.log(attributeDataData+name+type)
-
+    const attributeDataData = { name: name, type: type };
  
+    console.log(attributeDataData + name + type)
     onAddParameter(attributeDataData); // Call onAddParameter function passed down from parent
     setName("");
     setType("");
   };
-
   return (
     <div class="formbold-mb-3 formbold-input-wrapp">
       <div>
@@ -26,7 +22,6 @@ const AddParameter = ({ onAddParameter }) => {
           onChange={(e) => setName(e.target.value)}
           class="formbold-form-input formbold-w-45"
         />
-
         <input
           type="text"
           name="phone"
@@ -35,12 +30,9 @@ const AddParameter = ({ onAddParameter }) => {
           onChange={(e) => setType(e.target.value)}
           class="formbold-form-input"
         />
-                        <button class="formbold-form-input addCostomButton " >Add p</button>
+        <button onClick={(event) => handleSubmit(event)} class="formbold-form-input addCostomButton3 " >Add p</button>
       </div>
-      <button onClick={handleSubmit}>add param h</button>
     </div>
   )
 }
-
-
 export default AddParameter

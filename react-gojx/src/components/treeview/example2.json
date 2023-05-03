@@ -1,0 +1,36 @@
+{
+  "Module": {
+    "Name": "gb",
+    "Packages": {
+      "Package": {
+        "Name": "bhb",
+        "Classes": {
+          "Class": {
+            "Name": "my-class",
+            "Parent": 2,
+            "visibility": "visible",
+            "Methods": {
+              "method": {
+                "Name": "bgbgb",
+                "Type": "gbg",
+                "Packages": {
+                  "Parameter": [
+                    {
+                      "Name": "bgb",
+                      "Type": "bgb"
+                    },
+                    {
+                      "Name": "bgbg",
+                      "Type": "bggb"
+                    }
+                  ]
+                },
+                "Visibility": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

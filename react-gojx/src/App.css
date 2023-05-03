@@ -271,6 +271,7 @@
 /* Control the right side */
 .splitright {
   height: 100vh;
+  overflow-y:auto;
   background-color: #FCF6F5FF;
 }
 
@@ -296,7 +297,7 @@ grid-column-end: 3;
 
 
 .diagram-component {
-  
+  width:100vh;  height:800px;
   border: solid 1px black;
 
 }
@@ -316,4 +317,14 @@ grid-column-end: 3;
 .addCostomButton{
   color: white;
   background-color: rgb(193, 92, 9);
+}
+
+.addCostomButton2{
+  color: white;
+  background-color: rgb(20, 154, 202);
+}
+
+.addCostomButton3{
+  color: white;
+  background-color: rgb(202, 20, 135);
 }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import AddAttribute from './AddAttribute';
-import Addmethode from './Addmethode';
-
+import AddAttribute from 'components/attribute';
+import Addmethode from 'components/method';
 function AddClass({sendClassData }) {
   const [addattributelist, setaddattributelist] = useState([]);
   const [addmethodlist, setmethodelist] = useState([]);
@@ -15,13 +14,10 @@ function AddClass({sendClassData }) {
   const [classData, setClassData] = useState('');
   //const [addMethodDataParam, setAddMethodDataParam] = useState([]);
   //const [methodData, setMethodData] = useState(null);
-
-
   const addChildAttribute = (e) => {
     e.preventDefault();
     setaddattributelist([...addattributelist, <AddAttribute sendAttributeData={handleAttributeData} />]);
   };
-
   const addChildMethode = (e) => {
     e.preventDefault();
     setmethodelist([...addmethodlist, <Addmethode key={addmethodlist.length}
@@ -29,7 +25,6 @@ function AddClass({sendClassData }) {
       sendMthodeData={handleMethodData}
     />]);
   };
-
   const handleMethodData = (value) => {
     setMethodData([...MethodData, value]);
   };
@@ -38,26 +33,19 @@ function AddClass({sendClassData }) {
   };
   const handleSubmit = () => {
     //event.preventDefault();
-
     const classNam = 'my-class';
     const classvisibilit = 'visible';
-
-    const classda = { name: classNam, visibility: classvisibilit, parent: 2, };
+    const classda = { name: classNam, visibility: classvisibilit, parent: 2, methods: MethodData};
     const strindata = JSON.stringify(classda);
     const classd = JSON.parse(strindata);
+    setClassData(classda);
+    sendClassData(classda);
     // Set the state variable to the classda object
-
-
-
     //console.log('AddMethod data:',classa);
     // TODO: Handle form submission with data from both components
   }
-
-
   //************************Api REquest */
-
   const [responseData, setResponseData] = useState(null);
-
   const handleClick = () => {
     handleSubmit();
     //console.log(classData);
@@ -87,7 +75,6 @@ function AddClass({sendClassData }) {
           ]
         }
       ]
-
     };
     //const jsonclassdata = JSON.parse(classData);
     axios.post('http://127.0.0.1:8080/api/addmodule',
@@ -102,34 +89,27 @@ function AddClass({sendClassData }) {
         console.log(error);
       });
   };
-
   //************************************** */
-
   const attnumstyle = {
     color: '#755139FF',
     marginleft: '10px',
   };
-
-
   return (
-  
       <div class="formbold-form-wrapper">
         <img alt="" src="your-image-url-here.jpg" />
         <button onClick={(event) => sendClassData(event,classData)}>getXmlData </button>
-    
-
-        <div>
+        <div>classdata
           <pre>{JSON.stringify(classData, null, 2)}</pre>
         </div>
-
-        <form >
-
-    
+        <div>attributedata
+          <pre>{JSON.stringify(AttributeData, null, 2)}</pre>
+        </div>
+        <div>methodedate
+          <pre>{JSON.stringify(MethodData, null, 2)}</pre>
+        </div>
           <div class="formbold-input-flex">
             <div>
               <label for="firstname" class="formbold-form-label"> Class Name </label>
-
-
               <input
                 type="text"
                 name="classname"
@@ -138,24 +118,17 @@ function AddClass({sendClassData }) {
                 class="formbold-form-input"
                 onChange={(e) => setclassName(e.target.value)}
               />
-
             </div>
-
             <div>
               <label for="age" class="formbold-form-label">  Type </label>
               <select class="formbold-form-input" name="choice">
                 <option value="s1" selected>Class</option>
                 <option value="s2" >Interface</option>
-
-
               </select>
-
             </div>
           </div>
-
           <div class="formbold-input-wrapp formbold-mb-3">
             <label for="firstname" class="formbold-form-label"> Class Visibility </label>
-
             <div>
               <input
                 type="text"
@@ -188,19 +161,14 @@ function AddClass({sendClassData }) {
           </div>
           {addmethodlist.map((component, index) => {
             return (
-             
-
 <div key={index}>
 <h3  style={attnumstyle} >  Methode {index + 1}</h3>
 {component}
 </div>
             );
           })}
-          <button class="formbold-btn">Submit</button>
-        </form>
-
+          <button onClick={handleSubmit} class="formbold-btn">Submit Class</button>
     </div>
   );
 }
-
 export default AddClass;

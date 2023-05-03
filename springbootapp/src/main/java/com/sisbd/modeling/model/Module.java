@@ -8,6 +8,8 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -25,9 +27,9 @@ public class Module {
     @JoinColumn(name ="module_pac_fk", referencedColumnName = "id")
     private List<Package> packages;
 
-    @OneToMany(targetEntity = Package.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Link.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="module_link_fk", referencedColumnName = "id")
-    private List<Package> links;
+    private List<Link> links;
 
     @JacksonXmlProperty(isAttribute = true)
     public Long getId() {
@@ -45,7 +47,11 @@ public class Module {
     }
     @JacksonXmlElementWrapper(localName = "links")
     @JacksonXmlProperty(localName = "Link")
-    public List<Package> getLinks() {
+    public List<Link> getLinks() {
+        if (links == null) {
+            links = new ArrayList<>();
+        }
         return links;
     }
+
 }

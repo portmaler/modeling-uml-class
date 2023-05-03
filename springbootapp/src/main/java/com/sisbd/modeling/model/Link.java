@@ -7,24 +7,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
 @JacksonXmlRootElement(localName = "Link")
 public class Link {
 
     @Id
     @GeneratedValue
     private Long id;
+
+    private Long Source;
     @JacksonXmlProperty(isAttribute = true)
-    private String Source;
-    @JacksonXmlProperty(isAttribute = true)
-    private String Cible;
+    private Long Cible;
     @JacksonXmlProperty(isAttribute = true)
     private String AssociationType;
     @JacksonXmlProperty(isAttribute = true)
@@ -32,7 +33,11 @@ public class Link {
     @JacksonXmlProperty(isAttribute = true)
     private String MultiplicityCible;
 
-
-
-
+    public Link(Long source, Long cible, String associationType, String multiplicitySource, String multiplicityCible) {
+        Source = source;
+        Cible = cible;
+        AssociationType = associationType;
+        MultiplicitySource = multiplicitySource;
+        MultiplicityCible = multiplicityCible;
+    }
 }

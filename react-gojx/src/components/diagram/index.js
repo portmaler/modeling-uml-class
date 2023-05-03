@@ -1,9 +1,9 @@
-import React from 'react';
-
+import React,{useState} from 'react';
+import axios from 'axios';
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
 
-import '../App.css';  // contains .diagram-component CSS
+import 'App.css';  // contains .diagram-component CSS
 
 // ...
 
@@ -207,87 +207,64 @@ function initDiagram() {
  * This function handles any changes to the GoJS model.
  * It is here that you would make any updates to your React state, which is dicussed below.
  */
-/*function handleModelChange(changes) {
-    alert('GoJS model changed!');
-}*/
+function handleModelChange(changes) {
+    //alert('GoJS model changed!');
+}
+
+
+
+
+
 
 // render function...
 function DiagramClass() {
 
+    const [nodedata, setnodedata] = useState('');
+    const strr2 = '[{"key":1, "name" : "BankAccount", "properties" :[{"name": "owner", "type": "String", "visibility":"public" }, {"name": "balance", "type": "Currency", "visibility":"public" }], "methods":[{"name": "deposit","parameters":[{"name":"amount","type":"Currency"}], "visibility":"public" }, {"name": "withdraw","parameters":[{"name":"amount","type":"Currency"}], "visibility":"public" }]}, {"key":11, "name" : "Person", "properties" :[{"name": "name", "type": "String", "visibility":"public" }, {"name": "birth", "type": "Date", "visibility":"protected" }], "methods":[{"name": "getCurrentAge","parameters":[{"name":"b","type":"Currency"}], "visibility":"public" }]}]';
+    let strr =  strr2.split(" ").join(""); 
+    var nodedataa = JSON.parse(strr);
 
+    let linkData=[
+        { from: 1, to: 11, relationship: "generalization" }
+    ];
+
+    const handleClick = () => {
+
+        //const jsonclassdata = JSON.parse(classData);
+        axios.get('http://127.0.0.1:8080/api/getclassuml/102'
+        )
+          .then((response) => {
+            console.log(response);
+            let result = response.data;
+            let strr =  result.split(" ").join(""); 
+            var nodedataa = JSON.parse(strr);
+            setnodedata(nodedataa);
+          
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      let strr3 = '[{"key":1, "name" : "BankAccount", "properties" :[{"name": "owner", "type": "String", "visibility":"public" }, {"name": "balance", "type": "Currency", "visibility":"public" }], "methods":[{"name": "deposit","parameters":[{"name":"amount","type":"Currency"}], "visibility":"public" }, {"name": "withdraw","parameters":[{"name":"amount","type":"Currency"}], "visibility":"public" }]}, {"key":11, "name" : "Person", "properties" :[{"name": "name", "type": "String", "visibility":"public" }, {"name": "birth", "type": "Date", "visibility":"protected" }], "methods":[{"name": "getCurrentAge","parameters":[{"name":"b","type":"Currency"}], "visibility":"public" }]}]';
+      let str = '[{"key":1552, "name" : "my-class", "properties" :[], "methods":[{"name": "vcb ","parameters":[{" v ":"v bv"}], "visibility":"null" }]},{"key":1553, "name" : "my-class", "properties" :[], "methods":[{"name": "cccc","parameters":[{"cc":"ccc"}], "visibility":"null" }]}]';
+      let strrr =  str.split(" ").join(""); 
+      var nodedataa = JSON.parse(strrr );
     return (
       /*  <div className='DiagramClass' >
             <button onClick={initDiagram}>render</button>
             <div id="myDiagramDiv"></div>
         </div>*/
-  
+<div>
+<button onClick={handleClick}  class="formbold-btn">get Diagram</button>
+
           <ReactDiagram
                 initDiagram={initDiagram}
                 divClassName='diagram-component'
-                nodeDataArray={[
-                    {
-                      key: 1,
-                      name: "BankAccount",
-                      properties: [
-                        { name: "owner", type: "String", visibility: "public" },
-                        { name: "balance", type: "Currency", visibility: "public", default: "0" }
-                      ],
-                      methods: [
-                        { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" },
-                        { name: "withdraw", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" }
-                      ]
-                    },
-                    {
-                      key: 11,
-                      name: "Person",
-                      properties: [
-                        { name: "name", type: "String", visibility: "public" },
-                        { name: "birth", type: "Date", visibility: "protected" }
-                      ],
-                      methods: [
-                        { name: "getCurrentAge", type: "int", visibility: "public" }
-                      ]
-                    },
-                    {
-                      key: 12,
-                      name: "Student",
-                      properties: [
-                        { name: "classes", type: "List", visibility: "public" }
-                      ],
-                      methods: [
-                        { name: "attend", parameters: [{ name: "class", type: "Course" }], visibility: "private" },
-                        { name: "sleep", visibility: "private" }
-                      ]
-                    },
-                    {
-                      key: 13,
-                      name: "Professor",
-                      properties: [
-                        { name: "classes", type: "List", visibility: "public" }
-                      ],
-                      methods: [
-                        { name: "teach", parameters: [{ name: "class", type: "Course" }], visibility: "private" }
-                      ]
-                    },
-                    {
-                      key: 14,
-                      name: "Course",
-                      properties: [
-                        { name: "name", type: "String", visibility: "public" },
-                        { name: "description", type: "String", visibility: "public" },
-                        { name: "professor", type: "Professor", visibility: "public" },
-                        { name: "location", type: "String", visibility: "public" },
-                        { name: "times", type: "List", visibility: "public" },
-                        { name: "prerequisites", type: "List", visibility: "public" },
-                        { name: "students", type: "List", visibility: "public" }
-                      ]
-                    }
-                  ]}
-                linkDataArray={[
-                    { from: 1, to: 11, relationship: "generalization" }
-                ]}
-                onModelChange={()=>{}}
+                nodeDataArray = {nodedataa}
+                linkDataArray={ linkData}
+                onModelChange={handleModelChange}
         />
+        </div>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AddParameter from './AddParameter';
+import AddParameter from 'components/parameter';
 
 const Addmethode = ({ sendMthodeData }) => {
 
@@ -17,9 +17,9 @@ const Addmethode = ({ sendMthodeData }) => {
 
   const handleParameter = (value) => {
    
-    const stringifiedValue = JSON.stringify(value).replace("\\", "");
+   // const stringifiedValue = JSON.stringify(value).replace("\\", "");
   
-  setparametrelist([...parametrelist,stringifiedValue]);
+  setparametrelist([...parametrelist,value]);
   };
 
   const addChildparameter = (e) => {
@@ -33,7 +33,7 @@ const Addmethode = ({ sendMthodeData }) => {
     const methodData = {
       name: methodName,
       type: methodReturnType,
-      parameters: JSON.parse(parametrelist)
+      parameters: parametrelist
     };
     sendMthodeData(methodData);
   };
@@ -44,8 +44,8 @@ const Addmethode = ({ sendMthodeData }) => {
 
   return (
     <div className="AddAttribute">
-      <div>{parametrelist}</div>
- 
+
+      <div class="formbold-input-flex">
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label"> Methode name </label>
         <input
@@ -68,6 +68,10 @@ const Addmethode = ({ sendMthodeData }) => {
           onChange={(e) => setMethodReturnType(e.target.value)}
           class="formbold-form-input" />
       </div>
+
+      </div>
+
+      <div class="formbold-input-flex">
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label"> Visibility </label>
         <select class="formbold-form-input" name="choice">
@@ -87,16 +91,22 @@ const Addmethode = ({ sendMthodeData }) => {
           placeholder=" Default value"
           class="formbold-form-input" />
       </div>
-      <div><button onClick={addChildparameter} class="fa fa-plus" href='#'> add parametre</button></div>
+      </div>
+      <div>
+            <button onClick={addChildparameter} class="btn icon-btn btn-info" href="#">
+              <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-info"></span>
+              Add Parameter
+            </button></div>
       {addparameterlist.map((component, index) => {
         return (
           <div style={attnumstyle} key={index}>
-            Parameter {index + 1}
+           <h4>Parameter {index + 1}</h4> 
             {component}
           </div>
         );
       })}
-      <button onClick={submitDtat}>sent data method</button>
+      <button onClick={submitDtat} class="formbold-form-input addCostomButton2" >sent data method</button>
+   
 
     </div>
   )

@@ -1,15 +1,29 @@
 import './App.css';
-import AddPackage from './components/AddPackage';
-import DiagramClass from './components/DiagramClass';
-import React from 'react'
+import AddPackage from './components/package';
+import DiagramClass from './components/diagram';
+import React,{useState} from 'react'
+import DisplayXML from './components/treeview';
+
 
 
 
 
 function App() {
+ 
 
-  
+  const [xmldata, setxmlData] = useState('');
 
+
+
+
+  const handelXmlData  = (value) => {
+
+    let str = '[{"key":1552, "name" : "my-class", "properties" :[], "methods":[{"name": "vcb ","parameters":[{" v ":"v bv"}], "visibility":"null" }]},{"key":1553, "name" : "my-class", "properties" :[], "methods":[{"name": "cccc","parameters":[{"cc":"ccc"}], "visibility":"null" }]}]';
+        let strrr =  str.split(" ").join(""); 
+        var nodedataa = JSON.parse(strrr );
+
+  setxmlData(value);
+  }
 
   return (
     <div className="App" class="splitcontainer">
@@ -17,17 +31,18 @@ function App() {
 
 <div class="splitleft" >
 
-        <AddPackage/>
+        <AddPackage sendXmlData={handelXmlData} xmlData={xmldata}/>
       </div>
 
       <div id="xmldata" class="splitright">
      
-         
-         "xmldata"
+         <DisplayXML xmldatafromApp={xmldata} />
+    
 
       </div>
       <div class="splitbottom" >
-        <DiagramClass />
+        <DiagramClass  />
+       
       </div>
    
 
