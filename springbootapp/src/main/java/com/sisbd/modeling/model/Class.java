@@ -10,11 +10,12 @@ import lombok.*;
 
 import java.util.List;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@XmlAccessorType(XmlAccessType.PROPERTY)
 @JacksonXmlRootElement(localName = "Class")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Class {
     @Id
     @GeneratedValue
@@ -24,7 +25,7 @@ public class Class {
     private String Name;
     @JacksonXmlProperty
     private Long Parent;
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(isAttribute = true, localName = "visibility")
     private String Visibility;
     @OneToMany(targetEntity = Attribute.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="class_att_fk", referencedColumnName = "id")
@@ -45,8 +46,8 @@ public class Class {
         Parent = parent;
     }
 
-    public void setVisibility(String visibility) {
-        Visibility = visibility;
+    public void setVisibility(String Visibility) {
+        Visibility = Visibility;
     }
 
     public void setAttributes(List<Attribute> attributes) {
@@ -68,9 +69,7 @@ public class Class {
     public Long getParent() {
         return Parent;
     }
-    public String getVisibility() {
-        return Visibility;
-    }
+
     @JacksonXmlProperty(localName = "Attribute")
     @JacksonXmlElementWrapper(localName = "Attributes")
     public List<Attribute> getAttributes() {

@@ -47,10 +47,6 @@ public class Method {
     public List<Parameter> getParameters() {
         return parameters;
     }
-    @JacksonXmlProperty(localName = "Visibility")
-    public String getVisibility() {
-        return visibility;
-    }
 
     public void setId(Long id) {
         this.id = id;

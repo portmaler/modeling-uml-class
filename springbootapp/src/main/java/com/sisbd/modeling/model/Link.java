@@ -9,35 +9,38 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
 
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
+@Data
 @JacksonXmlRootElement(localName = "Link")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Link {
 
     @Id
     @GeneratedValue
+    @JacksonXmlProperty(isAttribute = true)
     private Long id;
 
-    private Long Source;
-    @JacksonXmlProperty(isAttribute = true)
-    private Long Cible;
-    @JacksonXmlProperty(isAttribute = true)
-    private String AssociationType;
-    @JacksonXmlProperty(isAttribute = true)
-    private String MultiplicitySource;
-    @JacksonXmlProperty(isAttribute = true)
-    private String MultiplicityCible;
+    @JacksonXmlProperty(localName = "Source")
+    private Long source;
+
+    @JacksonXmlProperty(localName = "Cible")
+    private Long cible;
+
+    @JacksonXmlProperty(isAttribute = true, localName = "AssociationType")
+    private String associationType;
+
+    @JacksonXmlProperty(localName = "MultiplicitySource")
+    private String multiplicitySource;
+
+    @JacksonXmlProperty(localName = "MultiplicityCible")
+    private String multiplicityCible;
 
     public Link(Long source, Long cible, String associationType, String multiplicitySource, String multiplicityCible) {
-        Source = source;
-        Cible = cible;
-        AssociationType = associationType;
-        MultiplicitySource = multiplicitySource;
-        MultiplicityCible = multiplicityCible;
+        this.source = source;
+        this.cible = cible;
+        this.associationType = associationType;
+        this.multiplicitySource = multiplicitySource;
+        this.multiplicityCible = multiplicityCible;
     }
 }

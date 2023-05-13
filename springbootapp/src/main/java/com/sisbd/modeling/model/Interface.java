@@ -16,12 +16,13 @@ public class Interface {
 
     @Id
     @GeneratedValue
+    @JacksonXmlProperty(isAttribute = true)
     private Long id;
 
     private String Name;
 
     private Long Parent;
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(isAttribute = true, localName = "visibility")
     private String Visibility;
     @OneToMany(targetEntity = Attribute.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="class_att_fk", referencedColumnName = "id")
@@ -69,10 +70,6 @@ public class Interface {
     @JacksonXmlProperty(localName = "Parent")
     public Long getParent() {
         return Parent;
-    }
-    @JacksonXmlProperty(localName = "Visibility")
-    public String getVisibility() {
-        return Visibility;
     }
     @JacksonXmlProperty(localName = "Attributes")
     public List<Attribute> getAttributes() {
